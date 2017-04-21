@@ -1,3 +1,7 @@
 h1 = model.title
-p source: {{model.source.id}}
-p target: {{model.target.id}}
+
+/ p = JSON.stringify(model, null, '  ');
+/ p source: {{model.source.id}}
+/ p target: {{model.target.id}}
+
+= outlet

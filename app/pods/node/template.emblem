@@ -7,9 +7,10 @@ each model.events as |event|
 
 h2 incoming
 each model.incoming as |edge|
-  p = edge.id
+  p = edge.name
 
 h2 outgoing
 each model.outgoing as |edge|
-  p = edge.id
+  p = edge.name
+
 = outlet

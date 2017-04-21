@@ -2,6 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model(params) {
-    return this.get('store').findRecord('edge', params.id)
+    this.get('store').findRecord('edge', params.id)
   }
+  // ,
+  // afterModel(model) {
+  //   debugger
+  // }
 });

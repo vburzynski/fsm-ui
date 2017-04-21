@@ -1,0 +1,8 @@
+.nodes
+  = link-to 'nodes'
+    | Nodes
+.edges
+  = link-to 'edges'
+    | Edges
+
+= outlet
