@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'fsm-ui',
+    podModulePrefix: 'pod-example/pods',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
