@@ -1,1 +1,8 @@
+h1 = model.title
+p { x: {{model.position.x}}, y: {{model.position.y}} }
+
+h2 Events
+each model.events as |event|
+  p = event
+/
 = outlet

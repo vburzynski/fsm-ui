@@ -1,9 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  a() {
-    let a = true;
-    a += 2;
-    return a;
-  },
+  model(params) {
+    return this.get('store').findRecord('node', params.id)
+  }
 });

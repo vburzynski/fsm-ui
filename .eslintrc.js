@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
-  extends: 'airbnb-base',
+  // extends: 'airbnb-base',
+  extends: 'eslint:recommended',
   plugins: [
     'import'
   ],
@@ -13,6 +14,7 @@ module.exports = {
     node: true
   },
   rules: {
+    "comma-dangle": ["error", "never"],
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": true,
       "optionalDependencies": true,
@@ -20,6 +22,11 @@ module.exports = {
     }]
   },
   settings: {
-    "import/core-modules": [ "ember" ]
+    "import/core-modules": [
+      "qunit",
+      "ember",
+      "ember-qunit",
+      "ember-data-model-fragments/attributes"
+    ]
   }
 };
