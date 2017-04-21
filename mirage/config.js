@@ -17,4 +17,6 @@ export default function () {
 
   this.get('/nodes');
   this.get('/nodes/:id');
+  this.get('/edges');
+  this.get('/edges/:id');
 }

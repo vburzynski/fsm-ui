@@ -4,5 +4,12 @@ p { x: {{model.position.x}}, y: {{model.position.y}} }
 h2 Events
 each model.events as |event|
   p = event
-/
+
+h2 incoming
+each model.incoming as |edge|
+  p = edge.id
+
+h2 outgoing
+each model.outgoing as |edge|
+  p = edge.id
 = outlet

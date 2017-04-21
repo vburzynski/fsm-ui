@@ -12,5 +12,4 @@ export default Factory.extend({
   },
 
   events: ['event1', 'event2']
-
 });
