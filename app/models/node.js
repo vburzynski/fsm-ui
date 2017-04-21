@@ -5,6 +5,6 @@ export default DS.Model.extend({
   title:    DS.attr('string', { defaultValue: 'New Node' }),
   position: fragment('fragments/position'),
   events:   array('string'),
-  outgoing: DS.hasMany('edge', { inverse: 'source' }),
-  incoming: DS.hasMany('edge', { inverse: 'target' })
+  outgoing: DS.hasMany('edge', { inverse: 'source', async: true }),
+  incoming: DS.hasMany('edge', { inverse: 'target', async: true })
 });

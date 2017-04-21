@@ -1,7 +1,10 @@
 h1 = model.title
 
-/ p = JSON.stringify(model, null, '  ');
-/ p source: {{model.source.id}}
-/ p target: {{model.target.id}}
+.node-link
+  = link-to 'node' model.source.id
+    | source: {{model.source.title}}
+.node-link
+  = link-to 'node' model.target.id
+    | target: {{model.target.title}}
 
 = outlet
