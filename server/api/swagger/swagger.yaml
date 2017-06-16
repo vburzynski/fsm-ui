@@ -1,0 +1,117 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Hello World App
+# during dev, should point to your local machine
+host: localhost:10010
+basePath: /
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /hello:
+    x-swagger-router-controller: hello_world
+    get:
+      description: Returns 'Hello' to the caller
+      operationId: hello
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+
+  /persons:
+    x-swagger-router-controller: persons
+    get:
+      summary: Gets some persons
+      description: Returns a list containing all persons. The list supports paging.
+      parameters:
+       - name: pageSize
+         in: query
+         description: Number of persons returned
+         type: integer
+       - name: pageNumber
+         in: query
+         description: Page number
+         type: integer
+      responses:
+        200:
+          description: A list of Person
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Person"
+    post:
+      summary: Creates a person
+      description: Adds a new person to the persons list.
+      parameters:
+        - name: person
+          in: body
+          description: The person to create.
+          schema:
+            $ref: "#/definitions/Person"
+      responses:
+        204:
+          description: Persons succesfully created.
+        400:
+          description: Persons couldn't have been created.
+  /persons/{username}:
+    get:
+      summary: Gets a person
+      description: Returns a single person for its username.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: The person's username
+          type: string
+      responses:
+        200:
+          description: A Person
+          schema:
+            $ref: "#/definitions/Person"
+        404:
+          description: The Person does not exists.
+
+definitions:
+  Person:
+    required:
+      - username
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      username:
+        type: string
+  HelloWorldResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
