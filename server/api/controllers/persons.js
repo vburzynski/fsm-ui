@@ -1,20 +1,28 @@
-var PersonRepository = require('../repositories/personRepository');
-var personRepo = new PersonRepository();
+const PersonRepository = require('../repositories/personRepository');
+
+const personRepo = new PersonRepository();
 
 module.exports = {
-  get: function(req, res) {
-    username = req.swagger.params.username.value;
+  get: function get(req, res) {
+    const person = personRepo.new({
+      firstName: 'John',
+      lastName: 'Smith',
+      username: 'user1',
+    });
+    person.save();
 
-    res.json({});
+    const result = personRepo.serializer.serialize(person);
+    res.json({ 'Person': [result] });
   },
-  post: function(req, res) {
-    params = req.swagger.params;
-    firstName = params.firstName.value;
-    lastName = params.lastName.value;
-    userName = params.username.value;
 
-    var person = personRepo.create({ firstName, lastName, userName });
+  post: function post(req, res) {
+    const params = req.swagger.params;
+    const firstName = params.firstName.value;
+    const lastName = params.lastName.value;
+    const userName = params.username.value;
 
-    res.json('not implemented');
-  }
-}
+    const person = personRepo.create({ firstName, lastName, userName });
+
+    res.json(personRepo.serializer.serialize(person));
+  },
+};

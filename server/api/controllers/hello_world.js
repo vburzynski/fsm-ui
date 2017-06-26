@@ -1,6 +1,6 @@
 'use strict';
 
-var util = require('util');
+const util = require('util');
 
 /*
  export the functions referenced in your Swagger document by name.
@@ -9,13 +9,13 @@ var util = require('util');
   - The HTTP Verb of the corresponding operation (get, put, post, delete, etc)
   - Or the operationId associated with the operation in your Swagger document
  */
-var controller = {
-  hello: function (req, res) {
-    var name = req.swagger.params.name.value || 'stranger';
-    var hello = util.format('Hello, %s!', name);
+const controller = {
+  hello: function hello(req, res) {
+    const name = req.swagger.params.name.value || 'stranger';
+    const message = util.format('Hello, %s!', name);
 
-    res.json(hello);
-  }
-}
+    res.json(message);
+  },
+};
 
 module.exports = controller;

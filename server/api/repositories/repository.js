@@ -1,60 +1,56 @@
-var _ = require('lodash');
-var databaseConnection = require('../databaseConnection');
-var JSONAPISerializer = require('jsonapi-serializer');
-var { Serializer, Deserializer } = JSONAPISerializer;
+const _ = require('lodash');
+const databaseConnection = require('../databaseConnection');
+const JSONAPISerializer = require('jsonapi-serializer');
+
+const { Serializer, Deserializer } = JSONAPISerializer;
 
 class Repository {
   constructor(type) {
     this.connection = databaseConnection.connect();
-    this.model      = databaseConnection.models[type];
-    this.schema     = databaseConnection.schemas[type];
+    this.Model = databaseConnection.models[type];
+    this.schema = databaseConnection.schemas[type];
 
-    var attributes = _
+    // TODO: Move to helper _filterMongooseAttributes() ?
+    const attributes = _
       .chain(this.schema)
       .get('paths')
       .keys()
       .pull('__v', '_id')
       .value();
 
-    this.serialize = new Serializer(type, {
+    this.serializer = new Serializer(type, {
       id: '_id',
-      attributes: attributes,
-      keyForAttribute: 'camelCase'
-    }).serialize;
+      attributes,
+      keyForAttribute: 'camelCase',
+    });
 
-    var data = [{ username: 'a', _id: 1, firstName: 'a', lastName: 'b' }];
+    const data = [{ username: 'a', _id: 1, firstName: 'a', lastName: 'b' }];
 
-    console.log(JSON.stringify(new Serializer(type, {
-      id: '_id',
-      attributes: attributes,
-      keyForAttribute: 'camelCase'
-    }).serialize(data), null, '  '));
-    console.log('wtf');
-    console.log(this.serialize(data))
+    console.log(JSON.stringify(this.serializer.serialize(data)));
   }
+
   new(json) {
-    return new this.model(json);
+    return new this.Model(json);
   }
-  create() {
-    return this.model.create.apply(this.model, arguments);
+
+  create(...args) {
+    return this.Model.create(...args);
   }
-  save(record) {
-    record.save();
-  }
-  delete(record) {
-    record.remove();
-  }
+
   findAll() {
-    this.model.find();
+    this.Model.find();
   }
+
   findById(id) {
-    this.model.findById(id);
+    this.Model.findById(id);
   }
+
   drop() {
-    this.model.collection.remove();
+    this.Model.collection.remove();
   }
+
   insertMany(records) {
-    this.model.insertMany(records);
+    this.Model.insertMany(records);
   }
 }
 

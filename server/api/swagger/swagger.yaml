@@ -94,22 +94,37 @@ paths:
 
 definitions:
   Person:
+    type: object
     required:
-      - username
+      - type
+      - attributes
     properties:
-      firstName:
+      type:
         type: string
-      lastName:
+        enum:
+          - Person
+      id:
         type: string
-      username:
-        type: string
+      attributes:
+        type: object
+        required:
+          - username
+        properties:
+          username:
+            type: string
+          firstName:
+            type: string
+          lastName:
+            type: string
   HelloWorldResponse:
+    type: object
     required:
       - message
     properties:
       message:
         type: string
   ErrorResponse:
+    type: object
     required:
       - message
     properties:
