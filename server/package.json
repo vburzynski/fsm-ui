@@ -13,7 +13,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.10.6",
     "swagger-express-mw": "^0.1.0",
-    "swagger-mongoose": "^1.1.2",
+    "swagger-mongoose": "git+https://github.com/vburzynski/swagger-mongoose.git#cedcc6b899475539c7001aa268bef4e8661e1d12",
     "yamljs": "^0.2.10"
   },
   "devDependencies": {

@@ -13,6 +13,11 @@ consumes:
 # format of the responses to the client (Accepts)
 produces:
   - application/json
+x-swagger-mongoose:
+  json-api: true
+  key-conversion: camelcase
+  schema-options:
+    timestamps: true
 paths:
   /hello:
     x-swagger-router-controller: hello_world
@@ -26,12 +31,10 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        200:
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -96,13 +99,12 @@ definitions:
   Person:
     type: object
     required:
+      - id
       - type
       - attributes
     properties:
       type:
         type: string
-        enum:
-          - Person
       id:
         type: string
       attributes:
@@ -117,6 +119,8 @@ definitions:
           lastName:
             type: string
   HelloWorldResponse:
+    x-swagger-mongoose:
+      exclude-schema: true
     type: object
     required:
       - message
@@ -124,6 +128,8 @@ definitions:
       message:
         type: string
   ErrorResponse:
+    x-swagger-mongoose:
+      exclude-schema: true
     type: object
     required:
       - message
