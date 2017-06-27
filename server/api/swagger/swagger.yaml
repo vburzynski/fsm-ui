@@ -171,25 +171,26 @@ definitions:
               type: string
           position:
             type: array
-            maxItems: 2
-            minItems: 2
             items:
               type: number
-        relationships:
-          type: object
-          properties:
-            outgoing:
-              type: array
-              items:
-                type: string
-                x-swagger-mongoose:
-                  $ref: "#/definitions/Node"
-            incoming:
-              type: array
-              items:
-                type: string
-                x-swagger-mongoose:
-                  $ref: "#/definitions/Node"
+              format: float
+              minItems: 2
+              maxItems: 2
+      relationships:
+        type: object
+        properties:
+          outgoing:
+            type: array
+            items:
+              type: string
+              x-swagger-mongoose:
+                $ref: "#/definitions/Node"
+          incoming:
+            type: array
+            items:
+              type: string
+              x-swagger-mongoose:
+                $ref: "#/definitions/Node"
   HelloWorldResponse:
     x-swagger-mongoose:
       exclude-schema: true
