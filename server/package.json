@@ -8,6 +8,8 @@
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "config": "^1.26.1",
     "express": "^4.12.3",
     "jsonapi-serializer": "^3.5.3",
     "lodash": "^4.17.4",
@@ -24,6 +26,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "swagger project test"
+    "test": "NODE_ENV=test swagger project test",
+    "debug-test": "NODE_ENV=test mocha --recursive --inspect --debug-brk  test"
   }
 }

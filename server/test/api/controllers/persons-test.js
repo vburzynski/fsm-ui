@@ -5,7 +5,8 @@ const expect = require('chai').expect;
 describe('controllers', function () {
   describe('chai', function () {
     describe('GET /persons', function () {
-      it.only('should return a default person', function (done) {
+      it('should return a default person', function (done) {
+        const self = this;
         request(server)
           .get('/persons')
           .set('Accept', 'application/json')
@@ -26,7 +27,11 @@ describe('controllers', function () {
             expect(data.attributes.firstName).to.equal('John');
             expect(data.attributes.lastName).to.equal('Smith');
 
-            done();
+            const Person = self.mongoose.model('Person');
+            Person.find().exec().then(function (persons) {
+              expect(persons.length).to.equal(1);
+              done();
+            });
           });
       });
     });

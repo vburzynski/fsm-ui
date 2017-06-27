@@ -3,7 +3,7 @@ const request = require('supertest');
 const server = require('../../../app');
 
 describe('controllers', function () {
-  describe('hello_world', function () {
+  describe('hello-world', function () {
     describe('GET /hello', function () {
       it('should return a default string', function (done) {
         request(server)

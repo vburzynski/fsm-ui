@@ -35,3 +35,7 @@ swagger:
       name: swagger_raw
 
 # any other values in this file are just loaded into the config for application access...
+
+db:
+  default: mongodb://localhost/fsm_ui
+  test: mongodb://localhost/fsm_ui_test

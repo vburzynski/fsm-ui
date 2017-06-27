@@ -20,7 +20,7 @@ x-swagger-mongoose:
     timestamps: true
 paths:
   /hello:
-    x-swagger-router-controller: hello_world
+    x-swagger-router-controller: hello-world
     get:
       description: Returns 'Hello' to the caller
       operationId: hello

@@ -2,6 +2,8 @@ const fs = require('fs');
 const YAML = require('yamljs');
 const mongoose = require('mongoose');
 const swaggerMongoose = require('swagger-mongoose');
+const config = require('config');
+const bluebird = require('bluebird');
 
 // var Person = compiled.models.Person;
 // var person = new Person({
@@ -22,8 +24,14 @@ module.exports = {
       return this.connection;
     }
 
-    // TODO: Move this to a environment/config file
-    mongoose.connect('mongodb://localhost/fsm_ui');
+    mongoose.Promise = bluebird;
+    if (mongoose.connection.readyState === 0) {
+      if (process.env.NODE_ENV === 'test') {
+        mongoose.connect(config.db.test);
+      } else {
+        mongoose.connect(config.db.default);
+      }
+    }
 
     this.connection = mongoose.connection;
     this.connection.on('error', console.error.bind(console, 'connection error:'));
