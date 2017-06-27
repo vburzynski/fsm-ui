@@ -22,7 +22,11 @@ class Repository {
       id: '_id',
       attributes,
       keyForAttribute: 'camelCase',
+      pluralizeType: false,
     });
+
+    // TODO: configure this
+    this.deserializer = new Deserializer();
 
     const data = [{ username: 'a', _id: 1, firstName: 'a', lastName: 'b' }];
 

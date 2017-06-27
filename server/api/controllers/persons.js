@@ -11,8 +11,10 @@ module.exports = {
     });
     person.save();
 
-    const result = personRepo.serializer.serialize(person);
-    res.json({ 'Person': [result] });
+    const result = personRepo.serializer.serialize([person]);
+
+    console.log(JSON.stringify(result, null, '  '));
+    res.json(result);
   },
 
   post: function post(req, res) {

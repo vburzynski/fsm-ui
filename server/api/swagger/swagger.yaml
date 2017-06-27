@@ -60,9 +60,13 @@ paths:
         200:
           description: A list of Person
           schema:
-            type: array
-            items:
-              $ref: "#/definitions/Person"
+            type: object
+            additionalProperties: false
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/Person"
     post:
       summary: Creates a person
       description: Adds a new person to the persons list.
@@ -118,6 +122,74 @@ definitions:
             type: string
           lastName:
             type: string
+  Edge:
+    type: object
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      type:
+        type: string
+      id:
+        type: string
+      attributes:
+        type: object
+        properties:
+          title:
+            type: string
+      relationships:
+        type: object
+        properties:
+          source:
+            type: string
+            x-swagger-mongoose:
+              $ref: "#/definitions/Node"
+          target:
+            type: string
+            x-swagger-mongoose:
+              $ref: "#/definitions/Node"
+  Node:
+    type: object
+    required:
+      - id
+      - type
+      - attributes
+    properties:
+      type:
+        type: string
+      id:
+        type: string
+      attributes:
+        type: object
+        properties:
+          title:
+            type: string
+          events:
+            type: array
+            items:
+              type: string
+          position:
+            type: array
+            maxItems: 2
+            minItems: 2
+            items:
+              type: number
+        relationships:
+          type: object
+          properties:
+            outgoing:
+              type: array
+              items:
+                type: string
+                x-swagger-mongoose:
+                  $ref: "#/definitions/Node"
+            incoming:
+              type: array
+              items:
+                type: string
+                x-swagger-mongoose:
+                  $ref: "#/definitions/Node"
   HelloWorldResponse:
     x-swagger-mongoose:
       exclude-schema: true
