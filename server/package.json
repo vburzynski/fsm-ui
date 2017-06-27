@@ -11,6 +11,7 @@
     "express": "^4.12.3",
     "jsonapi-serializer": "^3.5.3",
     "lodash": "^4.17.4",
+    "mocha": "^3.4.2",
     "mongoose": "^4.10.6",
     "swagger-express-mw": "^0.1.0",
     "swagger-mongoose": "git+https://github.com/vburzynski/swagger-mongoose.git#cedcc6b899475539c7001aa268bef4e8661e1d12",
