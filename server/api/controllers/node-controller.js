@@ -9,7 +9,7 @@ module.exports = {
     res.json(serializer.serialize(people));
   }),
 
-  get: co(function* get(req, res) {
+  getNode: co(function* get(req, res) {
     const params = req.swagger.params;
     const id = params.id.value;
 
@@ -22,7 +22,7 @@ module.exports = {
     }
   }),
 
-  post: co(function* post(req, res) {
+  createNode: co(function* post(req, res) {
     const params = req.swagger.params;
     const node = yield deserializer.deserialize(params.node.value);
 

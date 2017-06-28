@@ -9,7 +9,7 @@ module.exports = {
     res.json(serializer.serialize(edges));
   }),
 
-  get: co(function* get(req, res) {
+  getEdge: co(function* get(req, res) {
     const params = req.swagger.params;
     const id = params.id.value;
     const edge = yield edgeRepo.findById(id);
@@ -21,7 +21,7 @@ module.exports = {
     }
   }),
 
-  post: co(function* post(req, res) {
+  createEdge: co(function* post(req, res) {
     const params = req.swagger.params;
     const edge = yield deserializer.deserialize(params.edge.value);
 

@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Hello World App
+  title: FSM UI API
 # during dev, should point to your local machine
 host: localhost:10010
 basePath: /
@@ -10,7 +10,6 @@ schemes:
   - https
 consumes:
   - application/json
-# format of the responses to the client (Accepts)
 produces:
   - application/json
 x-swagger-mongoose:
@@ -41,7 +40,6 @@ paths:
             $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
-
   /people:
     x-swagger-router-controller: person-controller
     get:
@@ -60,6 +58,7 @@ paths:
                 items:
                   $ref: "#/definitions/Person"
     post:
+      operationId: createPerson
       summary: Creates a person
       description: Adds a new person to the people list.
       parameters:
@@ -85,6 +84,7 @@ paths:
   /people/{id}:
     x-swagger-router-controller: person-controller
     get:
+      operationId: getPerson
       summary: Gets a person
       description: Returns a single person by identifier.
       parameters:
@@ -121,6 +121,7 @@ paths:
                 items:
                   $ref: "#/definitions/Edge"
     post:
+      operationId: createEdge
       summary: Creates an edge
       description: Adds a new edge to the edge list.
       parameters:
@@ -146,6 +147,7 @@ paths:
   /edges/{id}:
     x-swagger-router-controller: edge-controller
     get:
+      operationId: getEdge
       summary: Gets an edge
       description: Returns a single edge by its identifier.
       parameters:
@@ -164,7 +166,6 @@ paths:
                 $ref: "#/definitions/Edge"
         404:
           description: The edge does not exist
-
   /nodes:
     x-swagger-router-controller: node-controller
     get:
@@ -183,6 +184,7 @@ paths:
                 items:
                   $ref: "#/definitions/Node"
     post:
+      operationId: createNode
       summary: Creates a node
       description: Adds a new node to the node list.
       parameters:
@@ -202,12 +204,13 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Edge"
+                $ref: "#/definitions/Node"
         400:
           description: Node could not be created.
   /nodes/{id}:
     x-swagger-router-controller: node-controller
     get:
+      operationId: getNode
       summary: Gets a node
       description: Returns a single node by its identifier.
       parameters:
@@ -284,10 +287,14 @@ definitions:
     properties:
       type:
         type: string
+        enum:
+         - Node
       id:
         type: string
       attributes:
         type: object
+        required:
+          - title
         properties:
           title:
             type: string
@@ -310,13 +317,13 @@ definitions:
             items:
               type: string
               x-swagger-mongoose:
-                $ref: "#/definitions/Node"
+                $ref: "#/definitions/Edge"
           incoming:
             type: array
             items:
               type: string
               x-swagger-mongoose:
-                $ref: "#/definitions/Node"
+                $ref: "#/definitions/Edge"
   HelloWorldResponse:
     x-swagger-mongoose:
       exclude-schema: true
