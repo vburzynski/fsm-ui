@@ -32,6 +32,39 @@ describe('Persons Controller', function () {
     });
   });
 
+  describe('GET /persons/{id}', function () {
+    it('should return a single person matching the id given', function* () {
+      const Person = this.mongoose.model('Person');
+
+      const person = yield Person.create({
+        username: 'user1',
+        firstName: 'John',
+        lastName: 'Smith',
+      });
+
+      const res = yield request(server)
+        .get(`/persons/${person.id}`)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      expect(res.body).to.exist;
+      expect(res.body.data).to.exist;
+
+      const data = res.body.data;
+      expect(data.attributes).to.exist;
+      expect(data.attributes.username).to.equal('user1');
+      expect(data.attributes.firstName).to.equal('John');
+      expect(data.attributes.lastName).to.equal('Smith');
+    });
+    it('should error with 404 if no person exists with the given id', function* () {
+      yield request(server)
+        .get('/persons/doesnotexist')
+        .set('Accept', 'application/json')
+        .expect(404);
+    });
+  });
+
   describe('POST /persons', function () {
     it('should create a person in the database', function* () {
       const user = {

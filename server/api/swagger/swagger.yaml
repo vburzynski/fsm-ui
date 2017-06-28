@@ -45,6 +45,7 @@ paths:
   /persons:
     x-swagger-router-controller: persons
     get:
+      operationId: index
       summary: Gets some persons
       description: Returns a list containing all persons. The list supports paging.
       parameters:
@@ -91,6 +92,7 @@ paths:
         400:
           description: Persons couldn't have been created.
   /persons/{id}:
+    x-swagger-router-controller: persons
     get:
       summary: Gets a person
       description: Returns a single person by identifier.

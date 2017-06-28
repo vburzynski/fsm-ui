@@ -5,9 +5,22 @@ const personRepo = new PersonRepository();
 const co = bluebird.coroutine;
 
 module.exports = {
-  get: co(function* get(req, res) {
+  index: co(function* get(req, res) {
     const persons = yield personRepo.findAll();
     res.json(personRepo.serializer.serialize(persons));
+  }),
+
+  get: co(function* get(req, res) {
+    const params = req.swagger.params;
+    const id = params.id.value;
+
+    const person = yield personRepo.findById(id);
+
+    if (person) {
+      res.json(personRepo.serializer.serialize(person));
+    } else {
+      res.status(404).end("Person does not exist");
+    }
   }),
 
   post: co(function* post(req, res) {
