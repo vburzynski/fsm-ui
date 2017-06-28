@@ -1,0 +1,5 @@
+ul
+  each model as |person|
+    li = person.username
+
+= outlet

@@ -1,3 +1,6 @@
+.people
+  = link-to 'people'
+    | people
 .nodes
   = link-to 'nodes'
     | Nodes

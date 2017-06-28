@@ -6,8 +6,8 @@ const co = bluebird.coroutine;
 
 module.exports = {
   index: co(function* get(req, res) {
-    const persons = yield personRepo.findAll();
-    res.json(personRepo.serializer.serialize(persons));
+    const people = yield personRepo.findAll();
+    res.json(personRepo.serializer.serialize(people));
   }),
 
   get: co(function* get(req, res) {

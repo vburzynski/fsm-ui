@@ -42,16 +42,16 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
 
-  /persons:
-    x-swagger-router-controller: persons
+  /people:
+    x-swagger-router-controller: people
     get:
       operationId: index
-      summary: Gets some persons
-      description: Returns a list containing all persons. The list supports paging.
+      summary: Gets some people
+      description: Returns a list containing all people. The list supports paging.
       parameters:
        - name: pageSize
          in: query
-         description: Number of persons returned
+         description: Number of people returned
          type: integer
        - name: pageNumber
          in: query
@@ -70,7 +70,7 @@ paths:
                   $ref: "#/definitions/Person"
     post:
       summary: Creates a person
-      description: Adds a new person to the persons list.
+      description: Adds a new person to the people list.
       parameters:
         - name: person
           in: body
@@ -83,16 +83,16 @@ paths:
                 $ref: "#/definitions/Person"
       responses:
         201:
-          description: Persons succesfully created.
+          description: people succesfully created.
           schema:
             type: object
             properties:
               data:
                 $ref: "#/definitions/Person"
         400:
-          description: Persons couldn't have been created.
-  /persons/{id}:
-    x-swagger-router-controller: persons
+          description: people couldn't have been created.
+  /people/{id}:
+    x-swagger-router-controller: people
     get:
       summary: Gets a person
       description: Returns a single person by identifier.

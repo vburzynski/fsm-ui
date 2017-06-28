@@ -11,6 +11,7 @@ Router.map(function () {
   this.route('node', { path: '/node/:id' });
   this.route('edges');
   this.route('edge', { path: '/edge/:id' });
+  this.route('people');
 });
 
 export default Router;

@@ -2,9 +2,9 @@ const request = require('supertest');
 const server = require('../../../app');
 const expect = require('chai').expect;
 
-describe('Persons Controller', function () {
-  describe('GET /persons', function () {
-    it('should return a collection of persons', function* () {
+describe('people Controller', function () {
+  describe('GET /people', function () {
+    it('should return a collection of people', function* () {
       const Person = this.mongoose.model('Person');
 
       yield Person.create({
@@ -14,7 +14,7 @@ describe('Persons Controller', function () {
       });
 
       const res = yield request(server)
-        .get('/persons')
+        .get('/people')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200);
@@ -32,7 +32,7 @@ describe('Persons Controller', function () {
     });
   });
 
-  describe('GET /persons/{id}', function () {
+  describe('GET /people/{id}', function () {
     it('should return a single person matching the id given', function* () {
       const Person = this.mongoose.model('Person');
 
@@ -43,7 +43,7 @@ describe('Persons Controller', function () {
       });
 
       const res = yield request(server)
-        .get(`/persons/${person.id}`)
+        .get(`/people/${person.id}`)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200);
@@ -59,13 +59,13 @@ describe('Persons Controller', function () {
     });
     it('should error with 404 if no person exists with the given id', function* () {
       yield request(server)
-        .get('/persons/doesnotexist')
+        .get('/people/doesnotexist')
         .set('Accept', 'application/json')
         .expect(404);
     });
   });
 
-  describe('POST /persons', function () {
+  describe('POST /people', function () {
     it('should create a person in the database', function* () {
       const user = {
         data: {
@@ -79,7 +79,7 @@ describe('Persons Controller', function () {
       };
 
       const res = yield request(server)
-        .post('/persons')
+        .post('/people')
         .send(user)
         .expect(201);
 
@@ -95,8 +95,8 @@ describe('Persons Controller', function () {
       expect(data.attributes.lastName).to.equal(user.data.attributes.lastName);
 
       const Person = this.mongoose.model('Person');
-      const persons = yield Person.find().exec();
-      expect(persons.length).to.equal(1);
+      const people = yield Person.find().exec();
+      expect(people.length).to.equal(1);
     });
   });
 });
