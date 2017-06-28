@@ -43,7 +43,7 @@ paths:
     x-swagger-pipe: swagger_raw
 
   /people:
-    x-swagger-router-controller: people
+    x-swagger-router-controller: person-controller
     get:
       operationId: index
       summary: Gets some people
@@ -92,7 +92,7 @@ paths:
         400:
           description: people couldn't have been created.
   /people/{id}:
-    x-swagger-router-controller: people
+    x-swagger-router-controller: person-controller
     get:
       summary: Gets a person
       description: Returns a single person by identifier.
@@ -112,7 +112,20 @@ paths:
                 $ref: "#/definitions/Person"
         404:
           description: The person does not exist
-
+  # /edges:
+  #   x-swagger-router-controller: edge-controller
+  #   get:
+  #   post:
+  # /edges/{id}:
+  #   x-swagger-router-controller: edge-controller
+  #   get:
+  # /nodes:
+  #   x-swagger-router-controller: node-controller
+  #   get:
+  #   post:
+  # /nodes/{id}:
+  #   x-swagger-router-controller: node-controller
+  #   get:
 definitions:
   Person:
     type: object

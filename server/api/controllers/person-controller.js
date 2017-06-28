@@ -1,4 +1,4 @@
-const PersonRepository = require('../repositories/personRepository');
+const PersonRepository = require('../repositories/person-repository');
 const bluebird = require('bluebird');
 
 const personRepo = new PersonRepository();
