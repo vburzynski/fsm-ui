@@ -22,7 +22,7 @@ class Repository {
       id: '_id',
       attributes,
       keyForAttribute: 'camelCase',
-      pluralizeType: false,
+      pluralizeType: true,
     });
 
     // TODO: configure this

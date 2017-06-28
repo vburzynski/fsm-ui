@@ -14,7 +14,9 @@ const controller = {
     const name = req.swagger.params.name.value || 'stranger';
     const message = util.format('Hello, %s!', name);
 
-    res.json({ message: message });
+    res
+      .type('application/vnd.api+json')
+      .send({ message: message });
   },
 };
 

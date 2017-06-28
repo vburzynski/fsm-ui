@@ -6,7 +6,9 @@ const { serializer, deserializer } = personRepo;
 module.exports = {
   getPeople: co(function* get(req, res) {
     const people = yield personRepo.findAll();
-    res.json(serializer.serialize(people));
+    res
+      .type('application/vnd.api+json')
+      .send(serializer.serialize(people));
   }),
 
   getPerson: co(function* get(req, res) {
@@ -16,7 +18,9 @@ module.exports = {
     const person = yield personRepo.findById(id);
 
     if (person) {
-      res.json(serializer.serialize(person));
+      res
+        .type('application/vnd.api+json')
+        .send(serializer.serialize(person));
     } else {
       res.status(404).end('Person does not exist');
     }
@@ -32,6 +36,9 @@ module.exports = {
       lastName: person.lastName,
     });
 
-    res.status(201).json(serializer.serialize(record));
+    res
+      .status(201)
+      .type('application/vnd.api+json')
+      .send(serializer.serialize(record));
   }),
 };

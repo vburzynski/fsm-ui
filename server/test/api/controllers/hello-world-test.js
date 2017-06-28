@@ -7,7 +7,7 @@ describe('Hello World Controller', function () {
     it('should return a default string', function (done) {
       request(server)
         .get('/hello')
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err, res) {
@@ -23,7 +23,7 @@ describe('Hello World Controller', function () {
       request(server)
         .get('/hello')
         .query({ name: 'Scott' })
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err, res) {

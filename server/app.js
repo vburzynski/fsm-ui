@@ -1,7 +1,9 @@
 const SwaggerExpress = require('swagger-express-mw');
 const app = require('express')();
+const bodyParser = require('body-parser')
 
 module.exports = app; // for testing
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 const config = {
   appRoot: __dirname, // required config

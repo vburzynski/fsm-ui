@@ -9,9 +9,9 @@ schemes:
   - http
   - https
 consumes:
-  - application/json
+  - application/vnd.api+json
 produces:
-  - application/json
+  - application/vnd.api+json
 x-swagger-mongoose:
   json-api: true
   key-conversion: camelcase
@@ -48,7 +48,7 @@ paths:
       description: Returns a list containing all people.
       responses:
         200:
-          description: A list of Person
+          description: A list of people
           schema:
             type: object
             additionalProperties: false
@@ -56,7 +56,7 @@ paths:
               data:
                 type: array
                 items:
-                  $ref: "#/definitions/Person"
+                  $ref: "#/definitions/people"
     post:
       operationId: createPerson
       summary: Creates a person
@@ -70,7 +70,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Person"
+                $ref: "#/definitions/people"
       responses:
         201:
           description: people succesfully created.
@@ -78,7 +78,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Person"
+                $ref: "#/definitions/people"
         400:
           description: people could not be created.
   /people/{id}:
@@ -100,7 +100,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Person"
+                $ref: "#/definitions/people"
         404:
           description: The person does not exist
   /edges:
@@ -111,7 +111,7 @@ paths:
       description: Returns a list containing all edges.
       responses:
         200:
-          description: A list of Edges
+          description: A list of edges
           schema:
             type: object
             additionalProperties: false
@@ -119,7 +119,7 @@ paths:
               data:
                 type: array
                 items:
-                  $ref: "#/definitions/Edge"
+                  $ref: "#/definitions/edges"
     post:
       operationId: createEdge
       summary: Creates an edge
@@ -133,7 +133,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Edge"
+                $ref: "#/definitions/edges"
       responses:
         201:
           description: Edge successfully created.
@@ -141,7 +141,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Edge"
+                $ref: "#/definitions/edges"
         400:
           description: Edge could not be created.
   /edges/{id}:
@@ -163,18 +163,18 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Edge"
+                $ref: "#/definitions/edges"
         404:
           description: The edge does not exist
   /nodes:
     x-swagger-router-controller: node-controller
     get:
       operationId: getNodes
-      summary: Gets all Nodes
+      summary: Gets all nodes
       description: Returns a list containin all nodes
       responses:
         200:
-          description: A list of Nodes
+          description: A list of nodes
           schema:
             type: object
             additionalProperties: false
@@ -182,7 +182,7 @@ paths:
               data:
                 type: array
                 items:
-                  $ref: "#/definitions/Node"
+                  $ref: "#/definitions/nodes"
     post:
       operationId: createNode
       summary: Creates a node
@@ -196,7 +196,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Node"
+                $ref: "#/definitions/nodes"
       responses:
         201:
           description: Node successfully created.
@@ -204,7 +204,7 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Node"
+                $ref: "#/definitions/nodes"
         400:
           description: Node could not be created.
   /nodes/{id}:
@@ -226,13 +226,13 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/Edge"
+                $ref: "#/definitions/edges"
         404:
           description: The node does not exist
 
 
 definitions:
-  Person:
+  people:
     type: object
     required:
       - type
@@ -253,7 +253,7 @@ definitions:
             type: string
           lastName:
             type: string
-  Edge:
+  edges:
     type: object
     required:
       - type
@@ -274,12 +274,12 @@ definitions:
           source:
             type: string
             x-swagger-mongoose:
-              $ref: "#/definitions/Node"
+              $ref: "#/definitions/nodes"
           target:
             type: string
             x-swagger-mongoose:
-              $ref: "#/definitions/Node"
-  Node:
+              $ref: "#/definitions/nodes"
+  nodes:
     type: object
     required:
       - type
@@ -287,8 +287,6 @@ definitions:
     properties:
       type:
         type: string
-        enum:
-         - Node
       id:
         type: string
       attributes:
@@ -317,13 +315,13 @@ definitions:
             items:
               type: string
               x-swagger-mongoose:
-                $ref: "#/definitions/Edge"
+                $ref: "#/definitions/edges"
           incoming:
             type: array
             items:
               type: string
               x-swagger-mongoose:
-                $ref: "#/definitions/Edge"
+                $ref: "#/definitions/edges"
   HelloWorldResponse:
     x-swagger-mongoose:
       exclude-schema: true

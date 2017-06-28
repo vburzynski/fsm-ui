@@ -1,4 +1,4 @@
-const edgeRepo = require('../repositories/node-repository');
+const edgeRepo = require('../repositories/edge-repository');
 const co = require('bluebird').coroutine;
 
 const { serializer, deserializer } = edgeRepo;
@@ -6,7 +6,9 @@ const { serializer, deserializer } = edgeRepo;
 module.exports = {
   getEdges: co(function* get(req, res) {
     const edges = yield edgeRepo.findAll();
-    res.json(serializer.serialize(edges));
+    res
+      .type('application/vnd.api+json')
+      .json(serializer.serialize(edges));
   }),
 
   getEdge: co(function* get(req, res) {
@@ -15,7 +17,9 @@ module.exports = {
     const edge = yield edgeRepo.findById(id);
 
     if (edge) {
-      res.json(serializer.serialize(edge));
+      res
+        .type('application/vnd.api+json')
+        .send(JSON.stringify(serializer.serialize(edge)));
     } else {
       res.status(404).end('Edge does not exist');
     }
@@ -29,6 +33,9 @@ module.exports = {
       title: edge.title,
     });
 
-    res.status(201).json(serializer.serialize(record));
+    res
+      .status(201)
+      .type('application/vnd.api+json')
+      .send(JSON.stringify(serializer.serialize(record)));
   }),
 };

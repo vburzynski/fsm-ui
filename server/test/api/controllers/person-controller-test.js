@@ -5,9 +5,9 @@ const expect = require('chai').expect;
 describe('people Controller', function () {
   describe('GET /people', function () {
     it('should return a collection of people', function* () {
-      const Person = this.mongoose.model('Person');
+      const People = this.mongoose.model('people');
 
-      yield Person.create({
+      yield People.create({
         username: 'user1',
         firstName: 'John',
         lastName: 'Smith',
@@ -15,7 +15,7 @@ describe('people Controller', function () {
 
       const res = yield request(server)
         .get('/people')
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .expect('Content-Type', /json/)
         .expect(200);
 
@@ -23,7 +23,7 @@ describe('people Controller', function () {
       expect(res.body.data).to.exist;
 
       const data = res.body.data[0];
-      expect(data.type).to.equal('Person');
+      expect(data.type).to.equal('people');
       expect(data.id).to.exist;
       expect(data.attributes).to.exist;
       expect(data.attributes.username).to.equal('user1');
@@ -34,9 +34,9 @@ describe('people Controller', function () {
 
   describe('GET /people/{id}', function () {
     it('should return a single person matching the id given', function* () {
-      const Person = this.mongoose.model('Person');
+      const People = this.mongoose.model('people');
 
-      const person = yield Person.create({
+      const person = yield People.create({
         username: 'user1',
         firstName: 'John',
         lastName: 'Smith',
@@ -44,7 +44,7 @@ describe('people Controller', function () {
 
       const res = yield request(server)
         .get(`/people/${person.id}`)
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .expect('Content-Type', /json/)
         .expect(200);
 
@@ -60,7 +60,7 @@ describe('people Controller', function () {
     it('should error with 404 if no person exists with the given id', function* () {
       yield request(server)
         .get('/people/doesnotexist')
-        .set('Accept', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .expect(404);
     });
   });
@@ -69,7 +69,7 @@ describe('people Controller', function () {
     it('should create a person in the database', function* () {
       const user = {
         data: {
-          type: 'Person',
+          type: 'people',
           attributes: {
             username: 'user3',
             firstName: 'first',
@@ -80,6 +80,8 @@ describe('people Controller', function () {
 
       const res = yield request(server)
         .post('/people')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
         .send(user)
         .expect(201);
 
@@ -87,15 +89,15 @@ describe('people Controller', function () {
       expect(res.body.data).to.exist;
 
       const data = res.body.data;
-      expect(data.type).to.equal('Person');
+      expect(data.type).to.equal('people');
       expect(data.id).to.exist;
       expect(data.attributes).to.exist;
       expect(data.attributes.username).to.equal(user.data.attributes.username);
       expect(data.attributes.firstName).to.equal(user.data.attributes.firstName);
       expect(data.attributes.lastName).to.equal(user.data.attributes.lastName);
 
-      const Person = this.mongoose.model('Person');
-      const people = yield Person.find().exec();
+      const People = this.mongoose.model('people');
+      const people = yield People.find().exec();
       expect(people.length).to.equal(1);
     });
   });

@@ -2,7 +2,7 @@ const Repository = require('./repository');
 
 class EdgeRepository extends Repository {
   constructor() {
-    super('Edge');
+    super('edges');
   }
 }
 
