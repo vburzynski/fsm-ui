@@ -90,23 +90,26 @@ paths:
                 $ref: "#/definitions/Person"
         400:
           description: Persons couldn't have been created.
-  /persons/{username}:
+  /persons/{id}:
     get:
       summary: Gets a person
-      description: Returns a single person for its username.
+      description: Returns a single person by identifier.
       parameters:
-        - name: username
+        - name: id
           in: path
           required: true
-          description: The person's username
+          description: The person's id
           type: string
       responses:
         200:
           description: A Person
           schema:
-            $ref: "#/definitions/Person"
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Person"
         404:
-          description: The Person does not exists.
+          description: The person does not exist
 
 definitions:
   Person:

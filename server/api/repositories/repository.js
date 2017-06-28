@@ -44,19 +44,19 @@ class Repository {
   }
 
   findAll() {
-    this.Model.find();
+    return this.Model.find();
   }
 
   findById(id) {
-    this.Model.findById(id);
+    return this.Model.findById(id);
   }
 
   drop() {
-    this.Model.collection.remove();
+    return this.Model.collection.remove();
   }
 
   insertMany(records) {
-    this.Model.insertMany(records);
+    return this.Model.insertMany(records);
   }
 }
 

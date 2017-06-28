@@ -6,31 +6,20 @@ const co = bluebird.coroutine;
 
 module.exports = {
   get: co(function* get(req, res) {
-    const person = personRepo.new({
-      firstName: 'John',
-      lastName: 'Smith',
-      username: 'user1',
-    });
-
-    yield person.save();
-
-    const result = personRepo.serializer.serialize([person]);
-
-    res.json(result);
+    const persons = yield personRepo.findAll();
+    res.json(personRepo.serializer.serialize(persons));
   }),
 
   post: co(function* post(req, res) {
     const params = req.swagger.params;
-    const newPerson = yield personRepo.deserializer.deserialize(params.person.value);
+    const person = yield personRepo.deserializer.deserialize(params.person.value);
 
-    const person = yield personRepo.create({
-      username: newPerson.username,
-      firstName: newPerson.firstName,
-      lastName: newPerson.lastName,
+    const record = yield personRepo.create({
+      username: person.username,
+      firstName: person.firstName,
+      lastName: person.lastName,
     });
 
-    const result = personRepo.serializer.serialize(person);
-
-    res.status(201).json(result);
+    res.status(201).json(personRepo.serializer.serialize(record));
   }),
 };
