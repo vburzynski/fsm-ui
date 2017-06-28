@@ -46,17 +46,8 @@ paths:
     x-swagger-router-controller: person-controller
     get:
       operationId: index
-      summary: Gets some people
-      description: Returns a list containing all people. The list supports paging.
-      parameters:
-       - name: pageSize
-         in: query
-         description: Number of people returned
-         type: integer
-       - name: pageNumber
-         in: query
-         description: Page number
-         type: integer
+      summary: Gets all people
+      description: Returns a list containing all people.
       responses:
         200:
           description: A list of Person
@@ -90,7 +81,7 @@ paths:
               data:
                 $ref: "#/definitions/Person"
         400:
-          description: people couldn't have been created.
+          description: people could not be created.
   /people/{id}:
     x-swagger-router-controller: person-controller
     get:
@@ -112,20 +103,131 @@ paths:
                 $ref: "#/definitions/Person"
         404:
           description: The person does not exist
-  # /edges:
-  #   x-swagger-router-controller: edge-controller
-  #   get:
-  #   post:
-  # /edges/{id}:
-  #   x-swagger-router-controller: edge-controller
-  #   get:
-  # /nodes:
-  #   x-swagger-router-controller: node-controller
-  #   get:
-  #   post:
-  # /nodes/{id}:
-  #   x-swagger-router-controller: node-controller
-  #   get:
+  /edges:
+    x-swagger-router-controller: edge-controller
+    get:
+      operationId: index
+      summary: Gets all edges
+      description: Returns a list containing all edges.
+      responses:
+        200:
+          description: A list of Edges
+          schema:
+            type: object
+            additionalProperties: false
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/Edge"
+    post:
+      summary: Creates an edge
+      description: Adds a new edge to the edge list.
+      parameters:
+        - in: body
+          name: edge
+          description: the edge data.
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Edge"
+      responses:
+        201:
+          description: Edge successfully created.
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Edge"
+        400:
+          description: Edge could not be created.
+  /edges/{id}:
+    x-swagger-router-controller: edge-controller
+    get:
+      summary: Gets an edge
+      description: Returns a single edge by its identifier.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: the edge's id
+          type: string
+      responses:
+        200:
+          description: An edge
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Edge"
+        404:
+          description: The edge does not exist
+
+  /nodes:
+    x-swagger-router-controller: node-controller
+    get:
+      operationId: index
+      summary: Gets all Nodes
+      description: Returns a list containin all nodes
+      responses:
+        200:
+          description: A list of Nodes
+          schema:
+            type: object
+            additionalProperties: false
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/Node"
+    post:
+      summary: Creates a node
+      description: Adds a new node to the node list.
+      parameters:
+        - in: body
+          name: node
+          description: the node data.
+          required: true
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Node"
+      responses:
+        201:
+          description: Node successfully created.
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Edge"
+        400:
+          description: Node could not be created.
+  /nodes/{id}:
+    x-swagger-router-controller: node-controller
+    get:
+      summary: Gets a node
+      description: Returns a single node by its identifier.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: the node's id
+          type: string
+      responses:
+        200:
+          description: A node
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Edge"
+        404:
+          description: The node does not exist
+
+
 definitions:
   Person:
     type: object

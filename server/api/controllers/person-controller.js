@@ -1,13 +1,12 @@
-const PersonRepository = require('../repositories/person-repository');
-const bluebird = require('bluebird');
+const personRepo = require('../repositories/person-repository');
+const co = require('bluebird').coroutine;
 
-const personRepo = new PersonRepository();
-const co = bluebird.coroutine;
+const { serializer, deserializer } = personRepo;
 
 module.exports = {
   index: co(function* get(req, res) {
     const people = yield personRepo.findAll();
-    res.json(personRepo.serializer.serialize(people));
+    res.json(serializer.serialize(people));
   }),
 
   get: co(function* get(req, res) {
@@ -17,15 +16,15 @@ module.exports = {
     const person = yield personRepo.findById(id);
 
     if (person) {
-      res.json(personRepo.serializer.serialize(person));
+      res.json(serializer.serialize(person));
     } else {
-      res.status(404).end("Person does not exist");
+      res.status(404).end('Person does not exist');
     }
   }),
 
   post: co(function* post(req, res) {
     const params = req.swagger.params;
-    const person = yield personRepo.deserializer.deserialize(params.person.value);
+    const person = yield deserializer.deserialize(params.person.value);
 
     const record = yield personRepo.create({
       username: person.username,
@@ -33,6 +32,6 @@ module.exports = {
       lastName: person.lastName,
     });
 
-    res.status(201).json(personRepo.serializer.serialize(record));
+    res.status(201).json(serializer.serialize(record));
   }),
 };

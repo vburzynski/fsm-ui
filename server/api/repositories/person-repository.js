@@ -1,5 +1,4 @@
-var Repository = require('./repository');
-var _ = require('lodash');
+const Repository = require('./repository');
 
 class PersonRepository extends Repository {
   constructor() {
@@ -7,4 +6,4 @@ class PersonRepository extends Repository {
   }
 }
 
-module.exports = PersonRepository;
+module.exports = new PersonRepository();
