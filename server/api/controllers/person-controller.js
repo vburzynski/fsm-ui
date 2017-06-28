@@ -4,7 +4,7 @@ const co = require('bluebird').coroutine;
 const { serializer, deserializer } = personRepo;
 
 module.exports = {
-  index: co(function* get(req, res) {
+  getPeople: co(function* get(req, res) {
     const people = yield personRepo.findAll();
     res.json(serializer.serialize(people));
   }),

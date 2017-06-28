@@ -45,7 +45,7 @@ paths:
   /people:
     x-swagger-router-controller: person-controller
     get:
-      operationId: index
+      operationId: getPeople
       summary: Gets all people
       description: Returns a list containing all people.
       responses:
@@ -106,7 +106,7 @@ paths:
   /edges:
     x-swagger-router-controller: edge-controller
     get:
-      operationId: index
+      operationId: getEdges
       summary: Gets all edges
       description: Returns a list containing all edges.
       responses:
@@ -168,7 +168,7 @@ paths:
   /nodes:
     x-swagger-router-controller: node-controller
     get:
-      operationId: index
+      operationId: getNodes
       summary: Gets all Nodes
       description: Returns a list containin all nodes
       responses:

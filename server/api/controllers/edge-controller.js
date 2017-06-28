@@ -4,7 +4,7 @@ const co = require('bluebird').coroutine;
 const { serializer, deserializer } = edgeRepo;
 
 module.exports = {
-  index: co(function* get(req, res) {
+  getEdges: co(function* get(req, res) {
     const edges = yield edgeRepo.findAll();
     res.json(serializer.serialize(edges));
   }),
