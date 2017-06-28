@@ -26,7 +26,9 @@ class Repository {
     });
 
     // TODO: configure this
-    this.deserializer = new Deserializer();
+    this.deserializer = new Deserializer({
+      keyForAttribute: 'camelCase',
+    });
 
     const data = [{ username: 'a', _id: 1, firstName: 'a', lastName: 'b' }];
 

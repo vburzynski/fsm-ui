@@ -73,12 +73,21 @@ paths:
       parameters:
         - name: person
           in: body
-          description: The person to create.
+          description: The person data.
+          required: true
           schema:
-            $ref: "#/definitions/Person"
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Person"
       responses:
-        204:
+        201:
           description: Persons succesfully created.
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/Person"
         400:
           description: Persons couldn't have been created.
   /persons/{username}:
@@ -103,7 +112,6 @@ definitions:
   Person:
     type: object
     required:
-      - id
       - type
       - attributes
     properties:
@@ -125,7 +133,6 @@ definitions:
   Edge:
     type: object
     required:
-      - id
       - type
       - attributes
     properties:
@@ -152,7 +159,6 @@ definitions:
   Node:
     type: object
     required:
-      - id
       - type
       - attributes
     properties:

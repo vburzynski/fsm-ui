@@ -19,14 +19,18 @@ module.exports = {
     res.json(result);
   }),
 
-  post: function post(req, res) {
+  post: co(function* post(req, res) {
     const params = req.swagger.params;
-    const firstName = params.firstName.value;
-    const lastName = params.lastName.value;
-    const userName = params.username.value;
+    const newPerson = yield personRepo.deserializer.deserialize(params.person.value);
 
-    const person = personRepo.create({ firstName, lastName, userName });
+    const person = yield personRepo.create({
+      username: newPerson.username,
+      firstName: newPerson.firstName,
+      lastName: newPerson.lastName,
+    });
 
-    res.json(personRepo.serializer.serialize(person));
-  },
+    const result = personRepo.serializer.serialize(person);
+
+    res.status(201).json(result);
+  }),
 };

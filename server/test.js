@@ -8,7 +8,7 @@ const testDir = 'test';
 fs.readdirSync(testDir)
   .filter(file => file.substr(-3) === '.js')
   .forEach((file) => {
-    console.log(`adding: ${file}`)
+    console.log(`adding: ${file}`);
     mocha.addFile(path.join(testDir, file));
   });
 
