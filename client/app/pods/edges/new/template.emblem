@@ -9,3 +9,5 @@ h2 Add a new edge
   .form-group
     .col-sm-offset-2.col-sm-10
       button{action "saveEdge" model} type="submit" class="btn btn-default" Save
+
+= outlet

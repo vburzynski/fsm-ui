@@ -1,1 +1,13 @@
+h2 Add a new node
+
+.form-horizontal
+  .form-group
+    label.col-sm-2.control-label Title
+    .col-sm10
+      = input type="text" value=model.title class="form-control" placeholder="Node's Title"
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      button{action "saveNode" model} type="submit" class="btn btn-default" Save
+
 = outlet
