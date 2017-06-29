@@ -4,10 +4,20 @@ h2 Add a new edge
   .form-group
     label.col-sm-2.control-label Title
     .col-sm10
-      = input type="text" value=model.title class="form-control" placeholder="Edge's Title"
+      = input type="text" value=edge.title class="form-control" placeholder="Edge's Title"
 
   .form-group
+    label.col-sm-2.control-label Target Node
+    .col-sm10
+      power-select [
+        options=nodes
+        searchEnabled=false
+        selected=(readonly edge.target)
+        onchange=(action (mut edge.target))
+      ] as |node|
+        = node.title
+  .form-group
     .col-sm-offset-2.col-sm-10
-      button{action "saveEdge" model} type="submit" class="btn btn-default" Save
+      button{action "saveEdge" edge} type="submit" class="btn btn-default" Save
 
 = outlet

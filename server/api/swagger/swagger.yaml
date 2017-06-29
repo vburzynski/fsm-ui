@@ -33,11 +33,11 @@ paths:
         200:
           description: Success
           schema:
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: "#/definitions/hello-world"
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/error-response"
   /swagger:
     x-swagger-pipe: swagger_raw
   /people:
@@ -339,6 +339,17 @@ definitions:
             type: string
           lastName:
             type: string
+  edges-identifier:
+    x-swagger-mongoose:
+      exclude-schema: true
+    type: object
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+        x-swagger-mongoose:
+          $ref: "#/definitions/edges"
   edges:
     type: object
     required:
@@ -358,13 +369,26 @@ definitions:
         type: object
         properties:
           source:
-            type: string
-            x-swagger-mongoose:
-              $ref: "#/definitions/nodes"
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/nodes-identifier"
           target:
-            type: string
-            x-swagger-mongoose:
-              $ref: "#/definitions/nodes"
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/nodes-identifier"
+  nodes-identifier:
+    x-swagger-mongoose:
+      exclude-schema: true
+    type: object
+    properties:
+      id:
+        type: string
+        x-swagger-mongoose:
+          $ref: "#/definitions/nodes"
+      type:
+        type: string
   nodes:
     type: object
     required:
@@ -399,16 +423,12 @@ definitions:
           outgoing:
             type: array
             items:
-              type: string
-              x-swagger-mongoose:
-                $ref: "#/definitions/edges"
+              $ref: "#/definitions/edges-identifier"
           incoming:
             type: array
             items:
-              type: string
-              x-swagger-mongoose:
-                $ref: "#/definitions/edges"
-  HelloWorldResponse:
+              $ref: "#/definitions/edges-identifier"
+  hello-world:
     x-swagger-mongoose:
       exclude-schema: true
     type: object
@@ -417,7 +437,7 @@ definitions:
     properties:
       message:
         type: string
-  ErrorResponse:
+  error-response:
     x-swagger-mongoose:
       exclude-schema: true
     type: object

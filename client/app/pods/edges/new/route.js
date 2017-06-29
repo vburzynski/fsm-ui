@@ -1,9 +1,13 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 export default Ember.Route.extend({
 
   model() {
-    return this.store.createRecord('edge');
+    return RSVP.hash({
+      edge: this.store.createRecord('edge'),
+      nodes: this.store.findAll('node'),
+    });
   },
 
   actions: {
@@ -12,9 +16,7 @@ export default Ember.Route.extend({
     },
 
     willTransition() {
-      // rollbackAttributes() removes the record from the store
-      // if the model 'isNew'
       this.controller.get('model').rollbackAttributes();
-    }
-  }
+    },
+  },
 });

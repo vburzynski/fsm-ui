@@ -14,7 +14,7 @@ module.exports = {
     node: true
   },
   rules: {
-    "comma-dangle": ["error", "never"],
+    // "comma-dangle": ["error", "never"],
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": true,
       "optionalDependencies": true,
@@ -25,6 +25,7 @@ module.exports = {
     "import/core-modules": [
       "qunit",
       "ember",
+      "rsvp",
       "ember-qunit",
       "ember-data-model-fragments/attributes"
     ]
