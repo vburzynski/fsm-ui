@@ -1,7 +1,7 @@
 ul
   each model as |edge|
     li
-      = link-to 'edge' edge.id
+      link-to 'edges.show' edge
         = edge.title
 
 = outlet

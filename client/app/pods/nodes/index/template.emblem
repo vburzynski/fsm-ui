@@ -1,0 +1,7 @@
+ul
+  each model as |node|
+    li
+      = link-to 'nodes.show' node
+        = node.title
+
+= outlet
