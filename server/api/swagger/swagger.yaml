@@ -226,11 +226,51 @@ paths:
             type: object
             properties:
               data:
-                $ref: "#/definitions/edges"
+                $ref: "#/definitions/nodes"
         404:
           description: The node does not exist
-
-
+    patch:
+      operationId: updateNode
+      summary: Updates a node
+      description: Updates the node with the given identifier
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: the node's id
+          type: string
+        - in: body
+          name: node
+          required: true
+          description: the updated parameters
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/nodes"
+      responses:
+        200:
+          description: Node was successfully updated
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/nodes"
+        404:
+          description: node not found
+    delete:
+      operationId: deleteNode
+      summary: Deletes a node
+      description: Deletes the node with the given identifier
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: the node's id
+          type: string
+      responses:
+        400:
+          description: Invalide node id
 definitions:
   people:
     type: object

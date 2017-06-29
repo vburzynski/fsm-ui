@@ -10,6 +10,7 @@ Router.map(function () {
   this.route('nodes', function() {
     this.route('new');
     this.route('show', { path: '/:id' });
+    this.route('edit', { path: '/:id/edit' });
   });
   this.route('edges', function() {
     this.route('new');

@@ -51,6 +51,18 @@ class Repository {
     return this.Model.findById(id);
   }
 
+  findOneAndUpdate(...args) {
+    return this.Model.findOneAndUpdate(...args);
+  }
+
+  findByIdAndUpdate(...args) {
+    return this.Model.findByIdAndUpdate(...args);
+  }
+
+  findByIdAndRemove(...args) {
+    return this.Model.findByIdAndRemove(...args);
+  }
+
   drop() {
     return this.Model.collection.remove();
   }
