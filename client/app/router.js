@@ -11,7 +11,6 @@ Router.map(function () {
     this.route('new');
     this.route('show', { path: '/:id' });
   });
-  this.route('node', { path: '/node/:id' });
   this.route('edges', function() {
     this.route('new');
     this.route('show', { path: '/:id' });
