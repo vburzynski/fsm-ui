@@ -166,6 +166,50 @@ paths:
                 $ref: "#/definitions/edges"
         404:
           description: The edge does not exist
+    patch:
+      operationId: updateEdge
+      summary: Updates an edge
+      description: Updates the edge with the matching id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: the edge's id
+          type: string
+        - in: body
+          name: edge
+          required: true
+          description: the updated edge properties
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/edges"
+      responses:
+        200:
+          description: Edge successfully updated
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "#/definitions/edges"
+        404:
+          description: Edge not found
+    delete:
+      operationId: deleteEdge
+      summary: Deletes an edge
+      description: Deletes the edge with the matching id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: the edge's id
+          type: string
+      responses:
+        200:
+          description: Edge deleted
+        404:
+          description: Edge not found
   /nodes:
     x-swagger-router-controller: node-controller
     get:
@@ -269,6 +313,8 @@ paths:
           description: the node's id
           type: string
       responses:
+        200:
+          description: Node deleted
         400:
           description: Invalide node id
 definitions:
