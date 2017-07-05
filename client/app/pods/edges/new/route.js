@@ -16,7 +16,7 @@ export default Ember.Route.extend({
     },
 
     willTransition() {
-      this.controller.get('model').rollbackAttributes();
+      this.controller.get('model.edge').rollbackAttributes();
     },
   },
 });

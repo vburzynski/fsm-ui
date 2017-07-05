@@ -39,9 +39,9 @@ module.exports = {
     // TODO: Move yaml path to config file
     const yaml = fs.readFileSync('./api/swagger/swagger.yaml', 'utf8');
     const spec = YAML.parse(yaml);
-    // TODO: Modify swaggerMongoose to support JSON API
     const compiled = swaggerMongoose.compile(spec);
 
+    this.swagger = spec;
     this.models = compiled.models;
     this.schemas = compiled.schemas;
     this.isConnected = true;

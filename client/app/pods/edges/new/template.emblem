@@ -7,6 +7,17 @@ h2 Add a new edge
       = input type="text" value=edge.title class="form-control" placeholder="Edge's Title"
 
   .form-group
+    label.col-sm-2.control-label Source Node
+    .col-sm10
+      power-select [
+        options=nodes
+        searchEnabled=false
+        selected=(readonly edge.source)
+        onchange=(action (mut edge.source))
+      ] as |node|
+        = node.title
+
+  .form-group
     label.col-sm-2.control-label Target Node
     .col-sm10
       power-select [
@@ -16,6 +27,7 @@ h2 Add a new edge
         onchange=(action (mut edge.target))
       ] as |node|
         = node.title
+
   .form-group
     .col-sm-offset-2.col-sm-10
       button{action "saveEdge" edge} type="submit" class="btn btn-default" Save

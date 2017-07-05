@@ -4,6 +4,12 @@ const JSONAPISerializer = require('jsonapi-serializer');
 
 const { Serializer, Deserializer } = JSONAPISerializer;
 
+function getReferenceType(property) {
+  const arrayRef = _.get(property, 'items.$ref', '');
+  const ref = _.get(property, 'properties.data.$ref', arrayRef);
+  return ref.split('/').pop();
+}
+
 class Repository {
   constructor(type) {
     this.connection = databaseConnection.connect();
@@ -18,21 +24,41 @@ class Repository {
       .pull('__v', '_id')
       .value();
 
-    this.serializer = new Serializer(type, {
+    const typeMap = {};
+
+    const serializerOptions = {
       id: '_id',
       attributes,
       keyForAttribute: 'camelCase',
+      typeForAttribute: (attribute, value) => value.type || typeMap[attribute],
       pluralizeType: true,
-    });
+    };
 
-    // TODO: configure this
-    this.deserializer = new Deserializer({
+    const deserializerOptions = {
       keyForAttribute: 'camelCase',
-    });
+    };
 
-    const data = [{ username: 'a', _id: 1, firstName: 'a', lastName: 'b' }];
+    const relationshipProps = _.get(databaseConnection, `swagger.definitions[${type}].properties.relationships.properties`);
 
-    console.log(JSON.stringify(this.serializer.serialize(data)));
+    _.forEach(relationshipProps, (property, name) => {
+      const propType = getReferenceType(property);
+
+      serializerOptions[name] = {
+        ref: (record, value) => (value ? value.toString() : value),
+        included: false,
+      };
+
+      if (propType) {
+        typeMap[name] = propType;
+
+        deserializerOptions[propType] = {
+          valueForRelationship: relationship => relationship.id,
+        };
+      }
+    }, this);
+
+    this.serializer = new Serializer(type, serializerOptions);
+    this.deserializer = new Deserializer(deserializerOptions);
   }
 
   new(json) {

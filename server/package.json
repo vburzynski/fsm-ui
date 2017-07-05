@@ -13,12 +13,13 @@
     "co-mocha": "^1.2.0",
     "config": "^1.26.1",
     "express": "^4.12.3",
+    "inflector-js": "^1.0.1",
     "jsonapi-serializer": "^3.5.3",
     "lodash": "^4.17.4",
     "mocha": "^3.4.2",
     "mongoose": "^4.10.6",
     "swagger-express-mw": "^0.1.0",
-    "swagger-mongoose": "git+https://github.com/vburzynski/swagger-mongoose.git#d21ed36325669d22f6f26f348886fdd09897ed4b",
+    "swagger-mongoose": "git+https://github.com/vburzynski/swagger-mongoose.git#4887ab243e68b26a27b17d734f8894a8338ceb6a",
     "yamljs": "^0.2.10"
   },
   "devDependencies": {

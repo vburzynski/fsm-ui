@@ -13,7 +13,6 @@ consumes:
 produces:
   - application/vnd.api+json
 x-swagger-mongoose:
-  json-api: true
   key-conversion: camelcase
   schema-options:
     timestamps: true
@@ -319,6 +318,8 @@ paths:
           description: Invalide node id
 definitions:
   people:
+    x-swagger-mongoose:
+      resource-object: true
     type: object
     required:
       - type
@@ -339,22 +340,12 @@ definitions:
             type: string
           lastName:
             type: string
-  edges-identifier:
-    x-swagger-mongoose:
-      exclude-schema: true
-    type: object
-    properties:
-      id:
-        type: string
-      type:
-        type: string
-        x-swagger-mongoose:
-          $ref: "#/definitions/edges"
   edges:
+    x-swagger-mongoose:
+      resource-object: true
     type: object
     required:
       - type
-      - attributes
     properties:
       type:
         type: string
@@ -372,28 +363,18 @@ definitions:
             type: object
             properties:
               data:
-                $ref: "#/definitions/nodes-identifier"
+                $ref: "#/definitions/nodes"
           target:
             type: object
             properties:
               data:
-                $ref: "#/definitions/nodes-identifier"
-  nodes-identifier:
-    x-swagger-mongoose:
-      exclude-schema: true
-    type: object
-    properties:
-      id:
-        type: string
-        x-swagger-mongoose:
-          $ref: "#/definitions/nodes"
-      type:
-        type: string
+                $ref: "#/definitions/nodes"
   nodes:
+    x-swagger-mongoose:
+      resource-object: true
     type: object
     required:
       - type
-      - attributes
     properties:
       type:
         type: string
@@ -423,11 +404,11 @@ definitions:
           outgoing:
             type: array
             items:
-              $ref: "#/definitions/edges-identifier"
+              $ref: "#/definitions/edges"
           incoming:
             type: array
             items:
-              $ref: "#/definitions/edges-identifier"
+              $ref: "#/definitions/edges"
   hello-world:
     x-swagger-mongoose:
       exclude-schema: true

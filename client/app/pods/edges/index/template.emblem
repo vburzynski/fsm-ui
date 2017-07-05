@@ -1,7 +1,9 @@
+= link-to 'edges.new' | Add New Edge
+
 ul
   each model as |edge|
     li
-      link-to 'edges.show' edge
+      = link-to 'edges.show' edge
         = edge.title
 
 = outlet

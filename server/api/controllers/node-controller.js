@@ -30,9 +30,8 @@ module.exports = {
     const params = req.swagger.params;
     const node = yield deserializer.deserialize(params.node.value);
 
-    const record = yield nodeRepo.create({
-      title: node.title,
-    });
+    console.log(JSON.stringify(node, null, '  '));
+    const record = yield nodeRepo.create(node);
 
     res
       .status(201)

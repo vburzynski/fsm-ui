@@ -6,6 +6,9 @@ const { serializer, deserializer } = edgeRepo;
 module.exports = {
   getEdges: co(function* get(req, res) {
     const edges = yield edgeRepo.findAll();
+
+    debugger;
+    console.log('edges:', JSON.stringify(serializer.serialize(edges), null, '  '));
     res
       .type('application/vnd.api+json')
       .json(serializer.serialize(edges));
@@ -29,10 +32,9 @@ module.exports = {
     const params = req.swagger.params;
     const edge = yield deserializer.deserialize(params.edge.value);
 
-    const record = yield edgeRepo.create({
-      title: edge.title,
-    });
-
+    console.log('creating edge:', JSON.stringify(edge, null, '  '));
+    const record = yield edgeRepo.create(edge);
+    console.log('new edge:', JSON.stringify(edge, null, '  '));
     res
       .status(201)
       .type('application/vnd.api+json')

@@ -1,3 +1,4 @@
+= link-to "nodes.new" | Create a node
 ul
   each model as |node|
     li
