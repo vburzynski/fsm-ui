@@ -28,7 +28,7 @@ module.exports = {
       "rsvp",
       "ember-qunit",
       "ember-data-model-fragments/attributes",
-      "htmlbars-inline-precompile"
+      "htmlbars-inline-precompile",
     ]
   }
 };

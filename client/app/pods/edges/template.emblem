@@ -1,3 +1,2 @@
 edges-nav-bar
-.container
-  = outlet
+= outlet
