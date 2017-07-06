@@ -4,8 +4,8 @@
   = navbar.content
     = navbar.nav as |nav|
       = nav.item
-        = nav.link-to 'edges.index' | Edges
+        = nav.link-to 'nodes.index' | Nodes
       = nav.item
-        = nav.link-to 'edges.new' | New Edge
+        = nav.link-to 'nodes.new' | New Node
 
 = yield

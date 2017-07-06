@@ -1,8 +1,8 @@
-= link-to "nodes.new" | Create a node
-ul
-  each model as |node|
-    li
-      = link-to 'nodes.show' node
-        = node.title
-
-= outlet
+.row
+  ul.col-sm-12
+    each model as |node|
+      li
+        = link-to 'nodes.show' node
+          = node.title
+.container
+  = outlet

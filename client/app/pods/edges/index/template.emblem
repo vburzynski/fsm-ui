@@ -1,7 +1,8 @@
-ul
-  each model as |edge|
-    li
-      = link-to 'edges.show' edge
-        = edge.title
+.row
+  ul.col-sm-12
+    each model as |edge|
+      li
+        = link-to 'edges.show' edge
+          = edge.title
 
 = outlet

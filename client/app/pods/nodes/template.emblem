@@ -1,1 +1,3 @@
-= outlet
+nodes-nav-bar
+.container
+  = outlet
