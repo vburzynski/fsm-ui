@@ -4,7 +4,4 @@ export default Ember.Route.extend({
   model(params) {
     return this.get('store').findRecord('edge', params.id);
   },
-  afterModel(edges, transition) {
-
-  },
 });
