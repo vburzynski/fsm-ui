@@ -1,6 +1,4 @@
 = bs-navbar fluid=true type='inverse' as |navbar|
-  .navbar-header
-    = navbar.toggle
   = navbar.content
     = navbar.nav as |nav|
       = nav.item
