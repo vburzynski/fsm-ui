@@ -3,12 +3,12 @@ import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-describe('Integration | Component | edges nav bar', function() {
+describe('Integration | Component | edges nav bar', () => {
   setupComponentTest('edges-nav-bar', {
-    integration: true
+    integration: true,
   });
 
-  it('renders', function() {
+  it('renders', function () {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.on('myAction', function(val) { ... });
     // Template block usage:
