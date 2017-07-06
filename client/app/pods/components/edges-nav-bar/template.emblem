@@ -1,0 +1,7 @@
+= bs-nav type='pills' justified=false stacked=false as |nav|
+  = nav.item
+    = nav.link-to 'edges.index' | Edges
+  = nav.item
+    = nav.link-to 'edges.new' | New Edge
+
+= yield

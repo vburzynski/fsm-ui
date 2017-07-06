@@ -1,0 +1,22 @@
+= bs-navbar [
+  type=(if inverse 'inverse')
+  fluid=fluid
+  collapsed=collapsed
+  onCollapse=(action (mut collapsed) true)
+  onExpand=(action (mut collapsed) false)
+] as |navbar|
+  .navbar-header
+    = navbar.toggle
+    = link-to "index" class="navbar-brand" | FSM UI
+  = navbar.content
+    = navbar.nav as |nav|
+      = nav.item
+        = nav.link-to 'index' | Home
+      = nav.item
+        = nav.link-to 'people' | People
+      = nav.item
+        = nav.link-to 'nodes' | Nodes
+      = nav.item
+        = nav.link-to 'edges' | Edges
+
+= yield

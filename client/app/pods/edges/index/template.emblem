@@ -1,5 +1,3 @@
-= link-to 'edges.new' | Add New Edge
-
 ul
   each model as |edge|
     li
