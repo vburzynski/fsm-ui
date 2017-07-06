@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Application from '../../app';
+import Application from '../../app'; // eslint-disable-line
 import config from '../../config/environment';
 
 export default function startApp(attrs) {

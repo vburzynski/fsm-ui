@@ -5,7 +5,7 @@ import { setupModelTest } from 'ember-mocha';
 describe('Unit | Model | node', () => {
   setupModelTest('node', {
     // Specify the other units that are required for this test.
-    needs: [],
+    needs: ['model:edge'],
   });
 
   // Replace this with your real tests.
