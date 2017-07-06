@@ -6,6 +6,7 @@
           tr
             th ID
             th Title
+            th Actions
         tbody
           each model as |node|
             tr
