@@ -1,5 +1,9 @@
 h2 Add a new node
 
+= bs-form formLayout='horizontal' model=model.node onSubmit=(action "saveNode" model.node) as |form|
+  = form.element controlType="text" label="Title" placeholder="Title" property="title" required=true
+  = bs-button defaultText="Submit" type="primary" buttonType="submit"
+
 .form-horizontal
   .form-group
     label.col-sm-2.control-label Title
