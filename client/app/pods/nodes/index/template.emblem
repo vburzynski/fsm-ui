@@ -14,5 +14,7 @@
               td
                 = link-to 'nodes.show' node
                   = node.title
+              td
+                = link-to 'nodes.edit' node | Edit
 
 = outlet

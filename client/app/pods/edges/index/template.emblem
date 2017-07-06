@@ -14,5 +14,7 @@
               td
                 = link-to 'edges.show' edge
                   = edge.title
+              td
+                = link-to 'edges.edit' edge | Edit
 
 = outlet
