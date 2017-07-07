@@ -69,6 +69,10 @@ class Repository {
     return this.Model.create(...args);
   }
 
+  find(...args) {
+    return this.Model.find(...args);
+  }
+  
   findAll() {
     return this.Model.find();
   }

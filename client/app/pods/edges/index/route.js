@@ -2,6 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model() {
-    return this.get('store').findAll('edge');
+    return this.get('store').findAll('edge', { include: "target,source" });
   }
 });
