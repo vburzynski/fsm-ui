@@ -7,7 +7,6 @@ export default Ember.Controller.extend({
   edges: computed.alias('model.edges'),
   actions: {
     saveNode(node) {
-      debugger;
       node.save().then(() => this.transitionTo('nodes'));
     }
   }
