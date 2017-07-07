@@ -7,7 +7,6 @@ module.exports = {
   getEdges: co(function* get(req, res) {
     const edges = yield edgeRepo.findAll();
 
-    debugger;
     console.log('edges:', JSON.stringify(serializer.serialize(edges), null, '  '));
     res
       .type('application/vnd.api+json')

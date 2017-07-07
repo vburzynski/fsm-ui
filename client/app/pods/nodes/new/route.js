@@ -8,7 +8,13 @@ export default Ember.Route.extend({
       edges: this.store.findAll('edge'),
     });
   },
+  didRender() {
+    console.log('fuck you'())
+  },
   actions: {
+    saveNode(node) {
+      node.save().then(() => this.transitionTo('nodes'));
+    },
     willTransition() {
       this.controller.get('model.node').rollbackAttributes();
     },

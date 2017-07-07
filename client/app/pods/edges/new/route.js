@@ -14,7 +14,6 @@ export default Ember.Route.extend({
     saveEdge(edge) {
       edge.save().then(() => this.transitionTo('edges'));
     },
-
     willTransition() {
       this.controller.get('model.edge').rollbackAttributes();
     },

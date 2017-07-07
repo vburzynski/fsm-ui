@@ -5,9 +5,10 @@ const { computed } = Ember;
 export default Ember.Controller.extend({
   node:  computed.alias('model.node'),
   edges: computed.alias('model.edges'),
+
   actions: {
-    saveNode(node) {
-      node.save().then(() => this.transitionTo('nodes'));
+    saveNode: function(node) {
+      this.get('target').send('saveNode', node);
     }
   }
 });
