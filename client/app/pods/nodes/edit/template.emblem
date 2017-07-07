@@ -1,13 +1,31 @@
 h2 Edit a node
 
-.form-horizontal
-  .form-group
-    label.col-sm-2.control-label Title
-    .col-sm10
-      = input type="text" value=model.title class="form-control" placeholder="Node's Title"
+= bs-form formLayout='horizontal' model=model.node onSubmit=(action "saveNode" model.node) as |form|
+  = form.element controlType="text" label="Title" placeholder="Title" property="title" required=true
+  = form.element controlType="number" label="Position X" placeholder="0" property="position.x" required=true
+  = form.element controlType="number" label="Position Y" placeholder="0" property="position.y" required=true
 
-  .form-group
-    .col-sm-offset-2.col-sm-10
-      button{action "saveNode" model} type="submit" class="btn btn-default" Save
+  = form.element label="Incoming" placeholder="Incoming" property="incoming" as |el|
+    power-select-multiple [
+      options=edges
+      searchEnabled=false
+      selected=(readonly el.value)
+      onchange=(action (mut el.value))
+    ] as |node|
+      = node.title
+
+  = form.element label="Outgoing" placeholder="Outgoing" property="outgoing" as |el|
+    power-select-multiple [
+      options=edges
+      searchEnabled=false
+      selected=(readonly el.value)
+      onchange=(action (mut el.value))
+    ] as |node|
+      = node.title
+
+  = form.element label="Events" placeholder="Events" property="events" as |el|
+    tags-input tags=el.value tagsChanged="onEventsChanged"
+
+  = bs-button defaultText="Submit" type="primary" buttonType="submit"
 
 = outlet

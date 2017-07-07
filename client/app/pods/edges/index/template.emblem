@@ -13,9 +13,9 @@
               td
                 = edge.id
               td
-                = link-to 'edges.show' edge
+                = link-to 'edges.show' edge.id
                   = edge.title
               td
-                = link-to 'edges.edit' edge | Edit
+                = link-to 'edges.edit' edge.id | Edit
 
 = outlet

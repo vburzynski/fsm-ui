@@ -13,9 +13,9 @@
               td
                 = node.id
               td
-                = link-to 'nodes.show' node
+                = link-to 'nodes.show' node.id
                   = node.title
               td
-                = link-to 'nodes.edit' node | Edit
+                = link-to 'nodes.edit' node.id | Edit
 
 = outlet
