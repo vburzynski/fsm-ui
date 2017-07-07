@@ -1,6 +1,5 @@
 const nodeRepo = require('../repositories/node-repository');
 const co = require('bluebird').coroutine;
-const _ = require('lodash');
 
 const { serializer, deserializer } = nodeRepo;
 

@@ -1,13 +1,9 @@
 h2 Edit edge
 
-.form-horizontal
-  .form-group
-    label.col-sm-2.control-label Title
-    .col-sm10
-      = input type="text" value=model.title class="form-control" placeholder="Edge's Title"
-
-  .form-group
-    .col-sm-offset-2.col-sm-10
-      button{action "saveEdge" model} type="submit" class="btn btn-default" Save
+= bs-form formLayout='horizontal' model=edge onSubmit=(action "saveEdge" edge) as |form|
+  = form.element controlType="text" label="Title" placeholder="Title" property="title" required=true
+  = form.element controlType="power-select" property="source" label="Source" options=nodes optionLabelPath="title"
+  = form.element controlType="power-select" property="target" label="Target" options=nodes optionLabelPath="title"
+  = bs-button defaultText="Submit" type="primary" buttonType="submit"
 
 = outlet
