@@ -9,11 +9,8 @@ export default Ember.Route.extend({
     });
   },
   actions: {
-    saveNode(node) {
-      node.save().then(() => this.transitionTo('nodes'));
-    },
     willTransition() {
       this.controller.get('model.node').rollbackAttributes();
-    }
+    },
   }
 });

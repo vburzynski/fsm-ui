@@ -6,7 +6,13 @@ export default Ember.Route.extend({
   },
   actions: {
     saveNode(node) {
-      node.save().then(() => this.transitionTo('nodes'));
+      debugger
+      node
+        .save()
+        .then(() => this.transitionTo('nodes'))
+        .catch( error => {
+          console.log(error);
+        });
     },
     willTransition(transition) {
       let model = this.controller.get('model');
