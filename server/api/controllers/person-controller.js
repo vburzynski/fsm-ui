@@ -28,13 +28,13 @@ module.exports = {
 
   createPerson: co(function* post(req, res) {
     const params = req.swagger.params;
-    const person = yield deserializer.deserialize(params.person.value);
+    const {
+      username,
+      firstName,
+      lastName,
+    } = yield deserializer.deserialize(params.person.value);
 
-    const record = yield personRepo.create({
-      username: person.username,
-      firstName: person.firstName,
-      lastName: person.lastName,
-    });
+    const record = yield personRepo.create({ username, firstName, lastName });
 
     res
       .status(201)

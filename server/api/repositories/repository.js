@@ -72,7 +72,7 @@ class Repository {
   find(...args) {
     return this.Model.find(...args);
   }
-  
+
   findAll() {
     return this.Model.find();
   }
